@@ -1,0 +1,9 @@
+com\example\demo\repository\questionsrepo.class
+com\example\demo\model\QuestionsModel.class
+com\example\demo\repository\UserRepo.class
+com\example\demo\QuizappApplication.class
+com\example\demo\service\userService.class
+com\example\demo\Controller\questioncontroller.class
+com\example\demo\service\questionservice.class
+com\example\demo\model\usermodel.class
+com\example\demo\Controller\usercontroller.class
