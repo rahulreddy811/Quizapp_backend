@@ -14,7 +14,7 @@ public class EmailService {
     // Store OTP per email
     private Map<String, String> otpStorage = new HashMap<>();
 
-    private final String API_KEY = "YOUR_RESEND_API_KEY";
+    private final String API_KEY = "re_Nbd6R2co_K88Lw11t2fLrXRujou25fe1X";
 
     public void SendOtpEmail(String email){
 
