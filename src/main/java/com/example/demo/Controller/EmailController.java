@@ -28,4 +28,9 @@ public class EmailController {
            return "Invalid Otp";
         }
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "OTP API working";
+    }
 }
