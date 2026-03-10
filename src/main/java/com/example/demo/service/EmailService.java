@@ -6,17 +6,22 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 public class EmailService {
 
-    private String otp;
+    // Store OTP per email
+    private Map<String, String> otpStorage = new HashMap<>();
 
-    private final String API_KEY = "re_Nbd6R2co_K88Lw11t2fLrXRujou25fe1X";
+    private final String API_KEY = "YOUR_RESEND_API_KEY";
 
     public void SendOtpEmail(String email){
 
-        otp = String.valueOf((int)(Math.random()*900000)+100000);
+        String otp = String.valueOf(100000 + new Random().nextInt(900000));
+
+        // store otp for that email
+        otpStorage.put(email, otp);
 
         String url = "https://api.resend.com/emails";
 
@@ -38,7 +43,15 @@ public class EmailService {
         restTemplate.postForObject(url, request, String.class);
     }
 
-    public boolean VerifyOtp(String inputOtp){
-        return otp != null && otp.equals(inputOtp);
+    public boolean VerifyOtp(String email,String inputOtp){
+
+        String storedOtp = otpStorage.get(email);
+
+        if(storedOtp != null && storedOtp.equals(inputOtp)){
+            otpStorage.remove(email); // remove after verification
+            return true;
+        }
+
+        return false;
     }
 }

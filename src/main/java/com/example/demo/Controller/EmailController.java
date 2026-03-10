@@ -19,13 +19,13 @@ public class EmailController {
     }
 
     @PostMapping("/verify")
-    public String VerifyOtp(@RequestParam String otp){
+    public String VerifyOtp(@RequestParam String email,
+                            @RequestParam String otp){
 
-        if (emailService.VerifyOtp(otp)){
-            return "otp verifies successfully";
-        }
-        else {
-           return "Invalid Otp";
+        if(emailService.VerifyOtp(email, otp)){
+            return "OTP verified successfully";
+        } else {
+            return "Invalid OTP";
         }
     }
 
