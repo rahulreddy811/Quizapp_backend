@@ -1,33 +1,44 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender MailSender;
-    private String GeneratedOtp;
+    private String otp;
 
-    public void SendOtpEmail(String toEmail){
+    private final String API_KEY = "re_Nbd6R2co_K88Lw11t2fLrXRujou25fe1X";
 
-        Random random = new Random();
-        GeneratedOtp = String.valueOf(100000+ random.nextInt(900000));
+    public void SendOtpEmail(String email){
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject("Quiz app Otp");
-        message.setText("Your OTP is: " + GeneratedOtp + "\nValid for 5 minutes.");
-        message.setFrom("yourgmail@gmail.com");
+        otp = String.valueOf((int)(Math.random()*900000)+100000);
 
-        MailSender.send(message);
+        String url = "https://api.resend.com/emails";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + API_KEY);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String,Object> body = new HashMap<>();
+
+        body.put("from", "onboarding@resend.dev");
+        body.put("to", email);
+        body.put("subject", "OTP Verification");
+        body.put("text", "Your OTP is: " + otp);
+
+        HttpEntity<Map<String,Object>> request = new HttpEntity<>(body, headers);
+
+        restTemplate.postForObject(url, request, String.class);
     }
 
-    public boolean VerifyOtp(String otp){
-        return otp.equals(GeneratedOtp);
+    public boolean VerifyOtp(String inputOtp){
+        return otp != null && otp.equals(inputOtp);
     }
 }
