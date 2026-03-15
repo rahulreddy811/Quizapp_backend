@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 
+import java.lang.reflect.Array;
 import java.util.UUID;
 
 @Entity
@@ -17,15 +18,18 @@ public class QuestionsModel {
     private String question_text;
     private String question_answer;
     private String tag;
+    @Column(name = "options")
+    private String[] options;
 
     public QuestionsModel() {
     }
 
-    public QuestionsModel(UUID id, String question_text, String question_answer, String tag) {
+    public QuestionsModel(UUID id, String question_text, String question_answer, String tag,String[] options) {
         this.id = id;
         this.question_text = question_text;
         this.question_answer = question_answer;
         this.tag = tag;
+        this.options = options;
     }
 
     public UUID getId() {
@@ -58,5 +62,13 @@ public class QuestionsModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    public void setOptions(String[] options) {
+        this.options = options;
     }
 }
