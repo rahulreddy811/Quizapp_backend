@@ -36,7 +36,7 @@ public class usercontroller {
     }
 
     @PostMapping
-    public usermodel CreateUser(@RequestBody usermodel userDetails){
+    public String CreateUser(@RequestBody usermodel userDetails){
        return userService.save(userDetails);
     }
 

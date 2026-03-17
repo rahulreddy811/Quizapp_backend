@@ -22,8 +22,15 @@ public class userService {
         return userRepo.findByUsername(username);
     }
 
-    public usermodel save(usermodel userModel){
-        return userRepo.save(userModel);
+    public String save(usermodel userModel){
+        Optional<usermodel> existingUser = userRepo.findByUsername(userModel.getUsername());
+
+        if(existingUser.isPresent()){
+            return "Username already exists";
+        }
+
+        userRepo.save(userModel);
+        return "User created successfully";
     }
 
     public Optional<usermodel> deleteUser(String username){
