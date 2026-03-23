@@ -1,9 +1,9 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.TorFModel;
+import com.example.demo.model.FillinBlanksModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TorFrepo extends JpaRepository<TorFModel,Integer> {
+public interface FillinBlanksrepo extends JpaRepository<FillinBlanksModel,Integer> {
 }
