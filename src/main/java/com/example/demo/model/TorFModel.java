@@ -12,9 +12,7 @@ public class TorFModel {
     @GeneratedValue
     @Column(updatable = false, nullable = false)
     private UUID id;
-    @Lob
     private String question;
-    @Lob
     private String answer;
 
     public TorFModel() {
