@@ -16,6 +16,9 @@ public class TorFModel {
     @Lob
     private String answer;
 
+    public TorFModel() {
+    }
+
 
     public TorFModel(UUID id, String question, String answer) {
         this.id = id;
