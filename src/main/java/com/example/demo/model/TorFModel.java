@@ -9,7 +9,8 @@ import java.util.UUID;
 public class TorFModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
+    @Column(updatable = false, nullable = false)
     private UUID id;
     @Lob
     private String question;
@@ -18,7 +19,6 @@ public class TorFModel {
 
     public TorFModel() {
     }
-
 
     public TorFModel(UUID id, String question, String answer) {
         this.id = id;
