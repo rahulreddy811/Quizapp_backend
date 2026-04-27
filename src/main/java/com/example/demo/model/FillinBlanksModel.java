@@ -23,10 +23,10 @@ public class FillinBlanksModel {
     @Transient
     private String[] optionsArray; // Computed for frontend
 
-    // Default constructor
+
     public FillinBlanksModel() {}
 
-    // Constructor without id
+
     public FillinBlanksModel(String questions, String answers, String options) {
         this.questions = questions;
         this.answers = answers;
